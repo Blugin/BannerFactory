@@ -28,6 +28,8 @@ namespace blugin\utils\bannerfactory;
 use blugin\utils\bannerfactory\data\BannerData;
 use blugin\utils\bannerfactory\data\PatternData;
 use pocketmine\item\Banner;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIds;
 
 class BannerFactory implements BannerConsts, DefaultPatternIds{
     /** @var PatternData[] banner name => banner data */
@@ -53,12 +55,13 @@ class BannerFactory implements BannerConsts, DefaultPatternIds{
             return clone self::$cache[$hash];
 
         $bannerData = self::getBannerData($bannerName);
-        if($bannerData  === null)
+        if($bannerData === null)
             throw new \InvalidArgumentException("$bannerName is invalid banner name");
 
-        self::$cache[$hash] = new Banner($colors[self::LEVEL_BASE]);
-        self::$cache[$hash]->setNamedTag($bannerData->nbtSerialize($colors));
-        return clone self::$cache[$hash];
+        /** @var Banner $banner */
+        $banner = ItemFactory::getInstance()->get(ItemIds::BANNER, $colors[self::LEVEL_BASE]);
+        $banner->setNamedTag($bannerData->nbtSerialize($colors));
+        return clone(self::$cache[$hash] = $banner);
     }
 
     public static function registerBannerData(string $patternName, BannerData $bannerData) : void{
