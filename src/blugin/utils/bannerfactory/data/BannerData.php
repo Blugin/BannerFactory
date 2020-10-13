@@ -53,7 +53,7 @@ class BannerData implements \JsonSerializable, NbtSerializable, BannerConsts{
         foreach($this->patterns as $pattern){
             $patterns[] = $pattern->nbtSerialize($colors);
         }
-        return new CompoundTag("", [new ListTag(self::TAG_PATTERNS, $patterns)]);
+        return CompoundTag::create()->setTag(self::TAG_PATTERNS, new ListTag($patterns));
     }
 
     public function jsonSerialize(){

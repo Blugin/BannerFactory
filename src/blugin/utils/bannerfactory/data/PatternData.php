@@ -27,8 +27,6 @@ namespace blugin\utils\bannerfactory\data;
 
 use blugin\utils\bannerfactory\BannerConsts;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\nbt\tag\IntTag;
-use pocketmine\nbt\tag\StringTag;
 
 class PatternData implements \JsonSerializable, NbtSerializable, BannerConsts{
     protected string $name;
@@ -56,11 +54,14 @@ class PatternData implements \JsonSerializable, NbtSerializable, BannerConsts{
         $this->colorLevel = $color;
     }
 
+    public function getColor() : int{
+        return $colors[$this->getColorLevel()] ?? self::COLOR_BLACK;
+    }
+
     public function nbtSerialize(array $colors) : CompoundTag{
-        return new CompoundTag("", [
-            new StringTag(self::TAG_PATTERN_NAME, $this->getName()),
-            new IntTag(self::TAG_PATTERN_COLOR, $colors[$this->getColorLevel()] ?? self::COLOR_BLACK),
-        ]);
+        return CompoundTag::create()
+            ->setString(self::TAG_PATTERN_NAME, $this->getName())
+            ->setInt(self::TAG_PATTERN_COLOR, $this->getColor());
     }
 
     public function jsonSerialize(){
