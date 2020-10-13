@@ -30,11 +30,11 @@ use blugin\utils\bannerfactory\data\PatternData;
 use pocketmine\item\Banner;
 
 class BannerFactory implements BannerConsts, DefaultPatternIds{
-    /** @var PatternData banner name => banner data */
-    protected static $bannerDataMap = null;
+    /** @var PatternData[] banner name => banner data */
+    protected static ?array $bannerDataMap = null;
 
     /** @var Banner[] hash => cached banner item */
-    protected static $cache = [];
+    protected static array $cache = [];
 
     /**
      * @param string $bannerName

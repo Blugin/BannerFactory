@@ -31,11 +31,9 @@ use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\StringTag;
 
 class PatternData implements \JsonSerializable, NbtSerializable, BannerConsts{
-    /** @var string */
-    protected $name;
+    protected string $name;
 
-    /** @var int */
-    protected $colorLevel;
+    protected int $colorLevel;
 
     public function __construct(string $name, int $color){
         $this->setName($name);

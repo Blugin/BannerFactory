@@ -31,7 +31,7 @@ use pocketmine\nbt\tag\ListTag;
 
 class BannerData implements \JsonSerializable, NbtSerializable, BannerConsts{
     /** @var PatternData[] */
-    protected $patterns = [];
+    protected array $patterns = [];
 
     /** @param PatternData[] $patterns */
     public function __construct(array $patterns){
