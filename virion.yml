@@ -2,7 +2,7 @@
 name: BannerFactory
 antigen: blugin\utils\bannerfactory
 version: 2.0.0
-api: 3.0.0
+api: 4.0.0
 authors: ['Blugin-team', 'PresentKim']
 description: "Factory to quickly create special shaped banner items"
 ...
